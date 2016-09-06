@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.lpl.kled.dao.systems.UserDao">
+    <resultMap id="User" 
+	    type="com.lpl.kled.entity.systems.User">
+		<result column="hostName" property="hostName" />
+		<result column="hostIp" property="hostIp" />
+		<result column="hostId" property="hostId" />
+	</resultMap>
+	
+	<select id="queryById" resultType="com.lpl.kled.entity.systems.User">
+	    select * from tb_user where id = #{id}
+	</select>	
+    <select id="getUserByAccount" resultType="com.lpl.kled.entity.systems.User">
+	    select * from tb_user where account = #{account}
+	</select>
+</mapper>
