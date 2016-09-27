@@ -1,9 +1,10 @@
 package com.lpl.kled.entity.base;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class Base {
-    private Long id;
+	private Long id;
     private Date createTime;
     private Date updateTime;
 	public Long getId() {

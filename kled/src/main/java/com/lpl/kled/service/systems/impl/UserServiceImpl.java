@@ -28,15 +28,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public QueryResult<User> getPaginationData(Map<String, Object> params) {
 		QueryResult<User> users=new QueryResult<User>();
-		users.setResult(getPaginationList(params));
+		
+		users.setData(getPaginationList(params));
 		users.setTotal(getPaginationCount(params));
 		return users;
 	}
 	
 	private List<User> getPaginationList(Map<String, Object> params){
-		return null;
+		return userDao.getPaginationList(params);
 	}
 	private Long getPaginationCount(Map<String, Object> params){
-		return null;
+		return userDao.getPaginationCount(params);
 	}
 }

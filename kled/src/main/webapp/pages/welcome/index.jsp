@@ -162,7 +162,7 @@
 	                  <a><span class='text-base'>系统</span></a>
 	                </li>
 	                <li >
-	                  <a href="#pages/systems/list"><span>用户管理</span></a>
+	                  <a href="#pages/systems/user/list"><span>用户管理</span></a>
 	                </li>
 	                <li>
 	                  <a href="#pages/services/service_definitions/index"><span>角色管理</span></a>
@@ -228,6 +228,9 @@
     <script src='${pageContext.request.contextPath}/assets/js/common.js'></script>
     <script src='${pageContext.request.contextPath}/assets/lib/moment/moment.js'></script>
     <script src='${pageContext.request.contextPath}/assets/lib/bootstrap-daterangepicker/daterangepicker.js'></script>
+    
+    <script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap.min.js"></script>
 
 <script type="text/javascript">
    

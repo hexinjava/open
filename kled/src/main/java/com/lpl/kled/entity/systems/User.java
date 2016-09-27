@@ -1,12 +1,17 @@
 package com.lpl.kled.entity.systems;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 
 import com.lpl.kled.entity.base.Base;
 
 @Entity
-public class User extends Base {
-    private String name;
+public class User extends Base{
+	/** 
+	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
+	 */ 
+	private String name;
     private String password;
     private String account;
     private String state;
