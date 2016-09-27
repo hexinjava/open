@@ -15,6 +15,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.lpl.kled.controller.base.BaseController;
 import com.lpl.kled.dto.QueryResult;
+import com.lpl.kled.dto.SubmitResult;
 import com.lpl.kled.entity.systems.User;
 import com.lpl.kled.service.systems.UserService;
 
@@ -36,7 +37,13 @@ public class UserController extends BaseController{
     public String toList(HttpServletRequest request,Model model){
     	return "/systems/user/list";
     }
-   
+    @RequestMapping("/pages/systems/user/add")
+    @ResponseBody
+    public String saveUserData(HttpServletRequest request,Model model){
+    	//SubmitResult result=
+    	return toJson(new SubmitResult(0));
+    }
+    
     @RequestMapping("/pages/systems/user/list/data")
 	@ResponseBody
     public String getUserData(HttpServletRequest request,Model model)throws Exception{
@@ -45,8 +52,4 @@ public class UserController extends BaseController{
         return toJson(result);
     }
     
-    public JsonArray String2JsonArray(String strJson) {
-    	JsonParser jsonParser=new JsonParser();
-    	return jsonParser.parse(strJson).getAsJsonArray();
-    }
 }

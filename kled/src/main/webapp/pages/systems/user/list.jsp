@@ -55,7 +55,7 @@
 								<div class="panel panel-default b-blue">
 									<div class="row wrapper">
 										<div class="col-xs-1">
-											<a class="btn btn-sm btn-info" >创建用户</a>
+											<a class="btn btn-sm btn-info" onclick="showModal('pages/systems/user/add.jsp')">创建用户</a>
 										</div>
 										<div class="col-xs-3">
 											<div class="input-group">
@@ -131,7 +131,7 @@ var columns=[{
 			}];
 var url="pages/systems/user/list/data";			
 $(document).ready(function() {
-    function retrieveData( sSource, aoData, fnCallback ) {     debugger;
+    function retrieveData( sSource, aoData, fnCallback ) {
     	var searchParams={}
 	    searchParams.userName  = $("#userName").val();
 		searchParams.userState = $("#userState").val();
@@ -156,7 +156,9 @@ $(document).ready(function() {
 function search(){
 	userTable.fnClearTable();
 }
-
+function createUser(){
+	showModal("pages/systems/user/add.jsp");
+}
 </script>
 </body>
 </html>

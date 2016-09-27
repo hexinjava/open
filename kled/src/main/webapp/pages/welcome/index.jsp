@@ -192,6 +192,9 @@
 	  <!-- / footer -->
 	</div>
 	
+	<div class="modal fade modal-draggable" id="ajax_modal_0" tabindex="-1" role="dialog"></div>
+    <div class="modal fade modal-draggable" id="ajax_modal_1" tabindex="-1" role="dialog"></div>
+    <div class="modal fade modal-draggable" id="ajax_modal_2" tabindex="-1" role="dialog"></div>
 
 
 
@@ -220,9 +223,9 @@
     <script src="${pageContext.request.contextPath}/assets/js/app.ajax-content.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/app.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/request.js"></script>
-<%--
+
     <script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/api_test.js"></script> --%>
+    <script src="${pageContext.request.contextPath}/assets/js/api_test.js"></script><%-- --%>
 
      <script src='${pageContext.request.contextPath}/assets/js/ajax-pushlet-client.js'></script>
     <script src='${pageContext.request.contextPath}/assets/js/common.js'></script>
