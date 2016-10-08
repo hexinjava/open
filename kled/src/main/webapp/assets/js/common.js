@@ -18,8 +18,8 @@ function hideLoading(){
 }
 var kled = {};
 
-kled.ajax = {
-	post : function(url, content, successFun, errorFun,notShowError,callbackCustParam) {
+kled.data = {
+	post : function(url, content, successFun, errorFun,notShowError,callbackCustParam) {debugger;
 		showLoading();
 		$.ajax({
 			//headers: {'Cookie' : document.cookie },
@@ -506,129 +506,88 @@ kled.table={
 				}
 		return $dataTable_config;
 	}
-		
-		
-    /*
-	data:function(table_id,url,columns,searchParams){debugger;
-		showLoading();
-		if(null == columns || typeof(columns) == "undefined"){
-			columns = [];
-        }
-		if(searchParams==null || typeof(searchParams) == "undefined"){
-			searchParams={};
-		}
-		var $t_table = $("#" + table_id);
-        var $api_table = $t_table.dataTable({
-        	"oLanguage": { //国际化配置 
-	    	    "sProcessing" : "正在获取数据，请稍后...",
-	    	    "sInfo":         "当前显示第 _START_ 至 _END_ 项，共 _TOTAL_ 项。",
-                "sInfoEmpty":    "当前显示第 0 至 0 项，共 0 项",
-                "sZeroRecords": "没有检索到数据",
-    	    	"oPaginate": {    
-                    "sFirst" : "第一页",    
-                    "sPrevious" : "上一页",    
-                    "sNext" : "下一页",    
-                    "sLast" : "最后一页"    
-                }	    	 
-             },
-			"bFilter":false,
-			"bLengthChange":false,
-			"bInfo": false,//页脚信息
-			"processing":true,
-			"ordering":false,
-			"searching":false,
-			"serverSide":true,
-			"pagingType":"full_numbers",
-			
-			sServerMethod: "POST",
-            sAjaxSource: url,
-            "fnServerParams": function (aoData) {  //查询条件
-                aoData.push(
-                    { "name": "CusCode", "value": $("#CusCode").val() },
-                    { "name": "CusName", "value": $("#CusName").val() }
-                    );
-            },
-			"ajax": function (data, callback, settings) {debugger;
-				searchParams.limit      = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
-				searchParams.startLimit = data.start;//开始的记录序号
-				searchParams.page       = (data.start / data.length)+1;//当前页码
-				searchParams.endLimit   = ((data.start / data.length)+1)*data.length;
-				
-				$.ajax({
-				    type: "GET",
-				    url: url,
-				    cache: false, //禁用缓存
-				    data: searchParams, //传入组装的参数
-				    dataType: "json",
-				    contentType : 'application/json; charset=utf-8',
-				    success: function (result) {
-				        //封装返回数据
-				        result=$.parseJSON(result)
-				        var returnData = {};
-				        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
-				        returnData.recordsTotal = result.total;//返回数据全部记录
-				        returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
-				        returnData.data = result.data;//返回的数据列表
-				        callback(returnData);
-						hideLoading();
-				   }
-				  });
-			},
-			"columns" : columns	
-        }).api();
-		return $api_table;
-		return $('#'+TableId).DataTable({
-	    	"oLanguage": { //国际化配置 
-				    	    "sProcessing" : "正在获取数据，请稍后...",
-				    	    "sInfo":         "当前显示第 _START_ 至 _END_ 项，共 _TOTAL_ 项。",
-		                    "sInfoEmpty":    "当前显示第 0 至 0 项，共 0 项",
-		                    "sZeroRecords": "没有检索到数据",
-			    	    	"oPaginate": {    
-			                    "sFirst" : "第一页",    
-			                    "sPrevious" : "上一页",    
-			                    "sNext" : "下一页",    
-			                    "sLast" : "最后一页"    
-			                }	    	 
-	    	             },
-	    	"bFilter":false,
-	    	"bLengthChange":false,
-	    	"bInfo": false,//页脚信息
-			"processing":true,
-			"ordering":false,
-			"searching":false,
-			"serverSide":true,
-			"pagingType":"full_numbers",
-			"ajax": function (data, callback, settings) {
-				if(paramData==null || typeof(paramData) == "undefined"){
-					paramData={};
-				}
-				paramData.limit      = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
-				paramData.startLimit = data.start;//开始的记录序号
-				paramData.page       = (data.start / data.length)+1;//当前页码
-				paramData.endLimit   = ((data.start / data.length)+1)*data.length;
-				
-				$.ajax({
-				    type: "GET",
-				    url: Url,
-				    cache: false, //禁用缓存
-				    data: paramData, //传入组装的参数
-				    dataType: "json",
-				    contentType : 'application/json; charset=utf-8',
-				    success: function (result) {
-				        //封装返回数据
-				        result=$.parseJSON(result)
-				        var returnData = {};
-				        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
-				        returnData.recordsTotal = result.total;//返回数据全部记录
-				        returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
-				        returnData.data = result.data;//返回的数据列表
-				        callback(returnData);
-						hideLoading();
-				   }
-				  });
-			},
-			"columns" : Columns		           
-	    });
-	}	*/
 }
-
+kled.ajax={
+	post:function(uri, data, successFun, errorFun,notShowError,callbackCustParam){
+		showLoading();
+		$.ajax( {     
+            type: "POST",
+            url: uri,   
+            dataType:"json",  
+            data: "postBody="+JSON.stringify(data),  
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+				hideLoading();
+				if(!notShowError){//默认错误时显示错误提示框
+					try {
+						var resText = XMLHttpRequest.responseText
+						res = JSON.parse(resText);
+						alert("["+res.exceptionCode+"]"+res.exceptionMessage);
+					} catch (e) {
+					}
+				}
+				if (errorFun) {
+					errorFun(XMLHttpRequest, textStatus, errorThrown);
+				}
+			},
+			success : function(data, textStatus) {
+				hideLoading();
+				successFun(data, textStatus,callbackCustParam);
+			}
+		});
+	},
+	
+	get : function(url, successFun, errorFun,callbackCustParam,notShowLoading) {
+		if(!notShowLoading){
+			showLoading();
+		}
+		$.ajax({
+			url : url,
+			type : 'GET',
+			cache : false,
+			dataType : 'json',
+			contentType : 'application/json; charset=utf-8',
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				if(!notShowLoading){
+					hideLoading();
+				}
+				if (errorFun) {
+					errorFun(XMLHttpRequest, textStatus, errorThrown);
+				}
+			},
+			success : function(data, textStatus) {
+				if(!notShowLoading){
+					hideLoading();
+				}
+				successFun(data, textStatus,callbackCustParam);
+			}
+		});
+	},
+	
+	del : function(url, successFun, errorFun,notShowError) {
+		showLoading();
+		$.ajax({
+			url : url,
+			type : 'DELETE',
+			dataType : "json",
+			contentType : 'application/json; charset=utf-8',
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				hideLoading();
+				if(!notShowError){//默认错误时显示错误提示框
+					try {
+						var resText = XMLHttpRequest.responseText
+						res = JSON.parse(resText);
+						alert("["+res.exceptionCode+"]"+res.exceptionMessage);
+					} catch (e) {
+					}
+				}
+				if (errorFun) {
+					errorFun(XMLHttpRequest, textStatus, errorThrown);
+				}
+			},
+			success : function(data, textStatus) {
+				hideLoading();
+				successFun(data, textStatus);
+			}
+		});
+	},
+}

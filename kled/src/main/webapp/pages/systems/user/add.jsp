@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label" for="">账号：</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" placeholder="" name="account">
+                        <input type="text" class="form-control" placeholder="" name="account" id="account">
                     </div>
                     <div class="col-xs-1">
                       <span class="text-danger inline m-l-n m-t-sm">*</span>
@@ -26,7 +26,25 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label" for="">姓名：</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" placeholder="姓名最多32个字符" maxlength="32" name="name">
+                        <input type="text" class="form-control" placeholder="姓名最多32个字符" maxlength="32" name="name" id="name">
+                    </div>
+                    <div class="col-xs-1">
+                      <span class="text-danger inline m-l-n m-t-sm">*</span>
+                    </div>                    
+                </div>
+                <div class="form-group" id="passwordDiv" style="display: none;">
+                    <label class="col-xs-3 control-label" for="">密码：</label>
+                    <div class="col-xs-8">
+                        <input type="password" class="form-control" placeholder="密码最少6个字符" minlength="6" name="password" id="password">
+                    </div>
+                    <div class="col-xs-1">
+                      <span class="text-danger inline m-l-n m-t-sm">*</span>
+                    </div>                    
+                </div>
+                <div class="form-group" id="repeatPasswordDiv" style="display: none;">
+                    <label class="col-xs-3 control-label" for="">重复密码：</label>
+                    <div class="col-xs-8">
+                        <input type="password" class="form-control" placeholder="必须与密码一致" minlength="6" name="repeatPassword" id="repeatPassword">
                     </div>
                     <div class="col-xs-1">
                       <span class="text-danger inline m-l-n m-t-sm">*</span>
@@ -48,13 +66,13 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label" for="">手机：</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" placeholder="手机号码" name="phone">
+                        <input type="text" class="form-control" placeholder="手机号码" name="phone" id="name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label" for="">邮箱：</label>
                     <div class="col-xs-8">
-                        <input type="email" maxlength="32" class="form-control" placeholder="例如：example@email.com" name="email">
+                        <input type="email" maxlength="32" class="form-control" placeholder="例如：example@email.com" name="email" id="email">
                     </div>
                 </div>
             </div>
@@ -67,16 +85,33 @@
 </form>
 </body>
 <script type="text/javascript">
+var scripts="";
+$('.page-content-area').ace_ajax('loadScripts', scripts, function(args) {
+	  if(args.userId!=null){
+		  kled.ajax.get('pages/systems/user/get?userId='+args.userId,function(result){
+			  result=$.parseJSON(result);
+			  for(var o in result){
+                  $("#"+o).val(result[o]);
+               }
+		  });  
+	  }else{
+		  $("#passwordDiv").css('display','block');
+		  $("#repeatPasswordDiv").css('display','block');
+	  }
+	  
+});
     function submitUser(){
-    	var data = $("#userForm").serializeArray();
-    	kled.ajax.post('pages/systems/user/add',data,function(result){
+     	kled.ajax.post('pages/systems/user/add',$("#userForm").serializeJson(),function(result){
     		result=$.parseJSON(result);
     		if(result.state==0){
-    			alert("操作成功");
+    			alert("保存成功");
     			hideModal();
+    			search();
+    		}if(result.state==1){
+    			alert("保存失败");
     		}
     		
-    	});
+    	}); 
     }
 </script>
 </html>

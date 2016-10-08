@@ -37,11 +37,19 @@ public class UserController extends BaseController{
     public String toList(HttpServletRequest request,Model model){
     	return "/systems/user/list";
     }
+    
     @RequestMapping("/pages/systems/user/add")
     @ResponseBody
-    public String saveUserData(HttpServletRequest request,Model model){
-    	//SubmitResult result=
-    	return toJson(new SubmitResult(0));
+    public String saveUser(HttpServletRequest request,Model model){
+    	User user=getPostEntity(request, User.class);
+    	boolean bool=this.userService.create(user);
+    	return toJson(new SubmitResult(bool?0:1));
+    }
+    
+    @RequestMapping("/pages/systems/user/get")
+    @ResponseBody
+    public String getUser(HttpServletRequest request,Model model){
+    	return toJson(this.userService.getUserById(Long.parseLong(request.getParameter("userId"))));
     }
     
     @RequestMapping("/pages/systems/user/list/data")
@@ -52,4 +60,10 @@ public class UserController extends BaseController{
         return toJson(result);
     }
     
+    @RequestMapping("/pages/systems/user/del")
+    @ResponseBody
+    public String delUser(HttpServletRequest request,Model model){
+    	boolean bool=this.userService.delUserById(Long.parseLong(request.getParameter("userId")));
+    	return toJson(new SubmitResult(bool?0:1));
+    }
 }

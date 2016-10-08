@@ -44,6 +44,10 @@ public class BaseController {
 		return result;
 	}
 	
+	public <T> T getPostEntity(HttpServletRequest request,Class<T> clazz){
+		return JSONUtils.fromJson(request.getParameter("postBody"), clazz, "yyyy-MM-dd hh:mm:ss");
+	}
+	
 	public String toJson(Object obj){
     	return gson.toJson(obj);
 	}

@@ -19,4 +19,8 @@ public interface UserDao {
 	public List<User> getPaginationList(Map<String, Object> params);
 	
 	public Long getPaginationCount(Map<String, Object> params);
+	
+	public Long create(User user);
+	
+	public Long delUserById(@Param(value="id")Long id);
 }

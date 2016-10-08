@@ -29,4 +29,13 @@
 	        and state = #{userState} 
  	    </if> 
 	</select>
+	
+	<insert id="create" parameterType="com.lpl.kled.entity.systems.User" >
+	     INSERT INTO tb_user (name,password,account,email,phone,createTime) 
+                   VALUES (#{name},#{password},#{account},#{email},#{phone},#{createTime})  
+	</insert>
+	
+	<delete id="delUserById">
+	    delete from tb_user where id = #{id}
+	</delete>
 </mapper>

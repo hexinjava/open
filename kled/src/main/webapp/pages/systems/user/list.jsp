@@ -126,7 +126,7 @@ var columns=[{
 			     "title":"操作",
 			     "data":null,
 			     "render":function ( data, type, full, meta ) {
-			         return '<a href="#">编辑</a>';
+			         return '<a href="#" onclick="editUser('+data.id+')">编辑</a> | <a href="#" onclick="removeUser('+data.id+')">删除</a>';
 			     }
 			}];
 var url="pages/systems/user/list/data";			
@@ -158,6 +158,20 @@ function search(){
 }
 function createUser(){
 	showModal("pages/systems/user/add.jsp");
+}
+function editUser(userId){
+	showModal("pages/systems/user/add.jsp?userId="+userId);
+}
+function removeUser(userId){
+	kled.ajax.del('pages/systems/user/del?userId='+userId,function(result){
+		result=$.parseJSON(result);
+		if(result.state==0){
+			alert("删除成功");
+			search();
+		}if(result.state==1){
+			alert("删除失败");
+		}
+	});
 }
 </script>
 </body>

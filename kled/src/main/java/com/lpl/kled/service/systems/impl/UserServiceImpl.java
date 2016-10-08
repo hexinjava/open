@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lpl.kled.common.utils.MD5;
 import com.lpl.kled.dao.systems.UserDao;
 import com.lpl.kled.dto.QueryResult;
 import com.lpl.kled.entity.systems.User;
@@ -39,5 +40,16 @@ public class UserServiceImpl implements UserService{
 	}
 	private Long getPaginationCount(Map<String, Object> params){
 		return userDao.getPaginationCount(params);
+	}
+	
+	public boolean create(User user){
+		user.setPassword(MD5.encodePassword(user.getPassword()));
+		Long l= userDao.create(user);
+		return l!=null && l>0?true:false;
+	}
+	@Override
+	public boolean delUserById(Long id) {
+		Long l= userDao.delUserById(id);
+		return l!=null && l>0?true:false;
 	}
 }

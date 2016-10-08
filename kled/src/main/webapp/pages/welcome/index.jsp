@@ -224,8 +224,8 @@
     <script src="${pageContext.request.contextPath}/assets/js/app.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/request.js"></script>
 
-    <script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/api_test.js"></script><%-- --%>
+<%--<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/api_test.js"></script> --%>
 
      <script src='${pageContext.request.contextPath}/assets/js/ajax-pushlet-client.js'></script>
     <script src='${pageContext.request.contextPath}/assets/js/common.js'></script>
@@ -234,6 +234,8 @@
     
     <script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap.min.js"></script>
+ 
+    <script src="${pageContext.request.contextPath}/assets/js/kled.js"></script>
 
 <script type="text/javascript">
    
