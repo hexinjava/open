@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.lpl.kled.dao.systems.PowerDao">
+	<select id="getPowerByLevel" resultType="com.lpl.kled.dto.MenuSecurity">
+	    select * from tb_power where level = #{level}
+	</select>	
+    
+    
+    <select id="getPowerByRoleId" resultType="com.lpl.kled.entity.systems.Power">
+	    select p.* from tb_power p left  join tb_role_power rp on p.id=rp.powerid  where rp.roleid = #{roleId}
+	</select>
+</mapper>
