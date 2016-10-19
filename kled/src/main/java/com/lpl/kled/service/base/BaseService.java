@@ -27,4 +27,41 @@ public interface BaseService<T> {
 	 * @throws
 	 */
 	public QueryResult<T> getPaginationData(Map<String, Object> params);
+	/**
+	 * 根据id查询T信息
+	 * @Title: getById 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param  id
+	 * @return T    返回类型 
+	 * @throws
+	 */
+	public T getById(Long id);
+	/**
+	 * 根据id删除信息
+	 * @Title: delById 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param  id
+	 * @return boolean    返回类型 
+	 * @throws
+	 */
+	public boolean delById(Long id);
+	/**
+	 * 创建T信息
+	 * @Title: create 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param  entity
+	 * @return boolean    返回类型 
+	 * @throws
+	 */
+	public boolean create(T entity);
+	/**
+	 * 更新T信息
+	 * @Title: create 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param  entity
+	 * @throws
+	 */
+	public boolean update(T entity);
+	
+	public boolean createOrUpdate(T entity);
 }

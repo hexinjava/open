@@ -19,7 +19,7 @@ function hideLoading(){
 var kled = {};
 
 kled.data = {
-	post : function(url, content, successFun, errorFun,notShowError,callbackCustParam) {debugger;
+	post : function(url, content, successFun, errorFun,notShowError,callbackCustParam) {
 		showLoading();
 		$.ajax({
 			//headers: {'Cookie' : document.cookie },
@@ -474,7 +474,13 @@ kled.uploader = {
 	}
 }
 
-//table 展示
+/**
+ * 
+ * 配置 jquery-DataTable 参数
+ * 
+ * hexin 2016-10-08
+ * 
+ */
 kled.table={
 	table_config:function(url,retrieveData,columns){
 		var $dataTable_config ={
@@ -505,8 +511,27 @@ kled.table={
 				"columns" : columns	
 				}
 		return $dataTable_config;
+	},
+	fnGetSelected:function (oTable) {//获取有selected calss样式的行，表示选中
+	    var aReturn = new Array();
+	    var aTrs = oTable.fnGetNodes();
+	    for (var i = 0; i < aTrs.length; i++) {
+	        if ($(aTrs[i]).hasClass('selected')) {
+	            aReturn.push(aTrs[i]);
+	        }
+	    }
+	    return aReturn;
 	}
+	
 }
+
+/**
+ * 
+ * 封装jquery ajax的 post\get\del方法
+ * 
+ * hexin 2016-10-08
+ * 
+ */
 kled.ajax={
 	post:function(uri, data, successFun, errorFun,notShowError,callbackCustParam){
 		showLoading();

@@ -47,7 +47,7 @@ public class LoginController {
     public String login(HttpServletRequest request,Model model){  
         String userName = request.getParameter("userName");
         String passWord = request.getParameter("passWord");
-        User user = this.userService.getUserByAccount(userName);
+        User user = this.userService.getCurrentUserByAccount(userName);
         String md5PassWord=MD5.encodePassword(passWord);
         if(user != null && md5PassWord.equals(user.getPassword())){
         	SessionUtil.setAttr(request, "currentUser", user);

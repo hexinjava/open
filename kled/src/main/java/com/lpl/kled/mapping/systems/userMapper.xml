@@ -3,6 +3,33 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.lpl.kled.dao.systems.UserDao">
+     <resultMap type="com.lpl.kled.entity.systems.User" id="userMap">  
+        <id property="id" column="id" />  
+        <result property="name" column="name" />  
+        <result property="account" column="account" />
+        <result property="state" column="state" />
+        <result property="email" column="email" />
+        <result property="phone" column="phone" />  
+    </resultMap>  
+  
+    <resultMap type="com.lpl.kled.entity.systems.User" id="userRoleMap" extends="userMap">  
+        <collection property="roles" ofType="com.lpl.kled.entity.systems.Role">  
+            <id property="id" column="roleId" />  
+            <result property="name" column="roleName" />  
+            <result property="remark" column="roleRemark" />  
+        </collection>  
+    </resultMap>  
+     
+     <select id="selectUserById" parameterType="long"  
+        resultMap="userRoleMap">  
+        select u.id,u.name,u.account,u.state,u.email,u.phone,
+               r.id as roleId,r.name as roleName, r.remark as roleRemark
+        from tb_user u left join tb_user_role ur on u.id=ur.userId  
+                       left join tb_role r on r.id=ur.roleId 
+        where u.id = #{id}  
+    </select> 
+    
+
 	<select id="queryById" resultType="com.lpl.kled.entity.systems.User">
 	    select * from tb_user where id = #{id}
 	</select>	
@@ -34,6 +61,10 @@
 	     INSERT INTO tb_user (name,password,account,email,phone,createTime) 
                    VALUES (#{name},#{password},#{account},#{email},#{phone},#{createTime})  
 	</insert>
+	
+	<update id="update" parameterType="com.lpl.kled.entity.systems.User">
+	    update tb_user set name=#{name},account=#{account},email=#{email},phone=#{phone},updateTime=#{updateTime} where id=#{id}
+	</update>
 	
 	<delete id="delUserById">
 	    delete from tb_user where id = #{id}

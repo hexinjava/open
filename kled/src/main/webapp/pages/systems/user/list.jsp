@@ -82,6 +82,7 @@
 													placeholder="请输入用户名称"
 													>
 											</div>
+							
 										</div>
 										<div class="col-xs-2">
 											<button class="btn btn-sm" type="button" onclick="reset()">重置</button>
@@ -156,6 +157,13 @@ $(document).ready(function() {
 function search(){
 	userTable.fnClearTable();
 }
+
+function reset(){
+	$("#userState").val("");
+	$("#userRole").val("");
+	$("#userName").val("");
+}
+
 function createUser(){
 	showModal("pages/systems/user/add.jsp");
 }

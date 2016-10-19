@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/WEB-INF/security.tld"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,6 +15,9 @@
 	<link href='${pageContext.request.contextPath}/assets/css/angulr.css' rel='stylesheet' type='text/css'>
 	<link href='${pageContext.request.contextPath}/assets/css/knockout-datatable.css' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" media="all" href="${pageContext.request.contextPath}/assets/css/app.css" />
+	
+	
+  
 </head>
 <body>
 	<div class='app app-header-fixed app-aside-fixed'>
@@ -169,6 +173,7 @@
 	                </li>
 	              </ul>
 	            </li>
+	          
 	          </ul>
 	        </div>
 	      </div>
@@ -236,7 +241,7 @@
     <script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap.min.js"></script>
  
     <script src="${pageContext.request.contextPath}/assets/js/kled.js"></script>
-
+    
 <script type="text/javascript">
    
 </script>

@@ -1,11 +1,16 @@
 package com.lpl.kled.entity.base;
 
-import java.io.Serializable;
 import java.util.Date;
 
+import com.google.gson.annotations.Expose;
+
 public class Base {
+	
+	@Expose
 	private Long id;
+	@Expose
     private Date createTime;
+	@Expose
     private Date updateTime;
 	public Long getId() {
 		return id;

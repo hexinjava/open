@@ -1,22 +1,31 @@
 package com.lpl.kled.entity.systems;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 
+import com.google.gson.annotations.Expose;
 import com.lpl.kled.entity.base.Base;
 
 @Entity
 public class User extends Base{
-	/** 
-	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
-	 */ 
+	
+	@Expose
 	private String name;
+	@Expose
     private String password;
+	@Expose
     private String account;
+	@Expose
     private String state;
+	@Expose
     private String email;
+	@Expose
     private String phone;
+	@Expose
+    private String roleIds;
+    @Expose
+    private List<Role> roles;
 	public String getName() {
 		return name;
 	}
@@ -52,6 +61,19 @@ public class User extends Base{
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	public String getRoleIds() {
+		return roleIds;
+	}
+	public void setRoleIds(String roleIds) {
+		this.roleIds = roleIds;
 	}
     
 	

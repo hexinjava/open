@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
 import com.lpl.kled.controller.base.BaseController;
 import com.lpl.kled.dto.QueryResult;
 import com.lpl.kled.dto.SubmitResult;
@@ -29,7 +27,7 @@ public class UserController extends BaseController{
     @RequestMapping("/showUser")  
     public String toIndex(HttpServletRequest request,Model model){  
         Long userId = Long.parseLong(request.getParameter("id"));  
-        User user = this.userService.getUserById(userId);  
+        User user = this.userService.getById(userId);  
         model.addAttribute("user", user);  
         return "/systems/showUser"; 
     }
@@ -42,14 +40,14 @@ public class UserController extends BaseController{
     @ResponseBody
     public String saveUser(HttpServletRequest request,Model model){
     	User user=getPostEntity(request, User.class);
-    	boolean bool=this.userService.create(user);
+    	boolean bool=this.userService.createOrUpdate(user);
     	return toJson(new SubmitResult(bool?0:1));
     }
     
     @RequestMapping("/pages/systems/user/get")
     @ResponseBody
     public String getUser(HttpServletRequest request,Model model){
-    	return toJson(this.userService.getUserById(Long.parseLong(request.getParameter("userId"))));
+    	return toJson(this.userService.selectUserById(Long.parseLong(request.getParameter("userId"))));
     }
     
     @RequestMapping("/pages/systems/user/list/data")
@@ -63,7 +61,7 @@ public class UserController extends BaseController{
     @RequestMapping("/pages/systems/user/del")
     @ResponseBody
     public String delUser(HttpServletRequest request,Model model){
-    	boolean bool=this.userService.delUserById(Long.parseLong(request.getParameter("userId")));
+    	boolean bool=this.userService.delById(Long.parseLong(request.getParameter("userId")));
     	return toJson(new SubmitResult(bool?0:1));
     }
 }

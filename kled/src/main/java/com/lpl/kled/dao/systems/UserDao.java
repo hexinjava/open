@@ -22,5 +22,16 @@ public interface UserDao {
 	
 	public Long create(User user);
 	
+	public Long update(User user);
+	
 	public Long delUserById(@Param(value="id")Long id);
+	/**
+	 * 根据id查询用户信息 包含角色
+	 * @Title: selectUserById 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param id
+	 * @return User    返回类型 
+	 * @throws
+	 */
+	public User selectUserById(@Param(value="id")Long id);
 }

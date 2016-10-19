@@ -6,15 +6,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
-
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.lpl.kled.common.utils.JSONUtils;
 
 public class BaseController {
-	private static Logger logger = Logger.getLogger(BaseController.class);
+	//private static Logger logger = Logger.getLogger(BaseController.class);
 	private static Gson gson = new Gson();
 	protected HashMap<String, Object> getQueryParams(HttpServletRequest request) {
 		HashMap<String, Object> result=new HashMap<String, Object>();

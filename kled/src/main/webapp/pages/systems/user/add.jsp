@@ -11,9 +11,10 @@
     <div class='modal-dialog modal-md' role='document'>
         <div class='modal-content'>
             <div class='modal-header'>
-                <button type="button" class="close" data-bind="click:$root.editPasswordCancel"><span aria-hidden="true">&times;</span></button><h3 class='modal-title'>个人信息</h3>
+                <button type="button" class="close" onclick="hideModal()"><span aria-hidden="true">&times;</span></button><h3 class='modal-title'>个人信息</h3>
             </div>
-            <div class='modal-body' data-bind="with:editUser">
+            <div class='modal-body'>
+                <input type="hidden" name="id" id="id"/>
                 <div class="form-group">
                     <label class="col-xs-3 control-label" for="">账号：</label>
                     <div class="col-xs-8">
@@ -50,23 +51,25 @@
                       <span class="text-danger inline m-l-n m-t-sm">*</span>
                     </div>                    
                 </div>
-                <!--
+                
                 <div class="form-group">
                     <label class="col-xs-3 control-label" for="">所属角色：</label>
-                    <div class="col-xs-8">
-						<select class="form-control m-b" disabled data-bind="options: $root.roleVO().roleName,optionsText:'name'">
-              			</select>
-	                        <input type="text" disabled class="form-control" placeholder="" data-bind="attr:{title:$root.showRoles($root.roleVO().roleName)},value:$root.showRoles($root.roleVO().roleName)">
+                    <div class="col-xs-6">
+	                    <input type="text" disabled class="form-control" style="width: 250px;" placeholder=""  id="selectdRoleNames">
+	                    <input type="hidden" name = "roleIds" id="selectdRoleIds">
+                    </div>
+                    <div class="col-xs-2">
+                      <button name="button" type="button" class="btn btn-default btn btn-default" onclick="openSelectRole()">选择</button>
                     </div>
                     <div class="col-xs-1">
                       <span class="text-danger inline m-l-n m-t-sm">*</span>
-                    </div>                    
+                    </div> 
                 </div>
-                -->
+                
                 <div class="form-group">
                     <label class="col-xs-3 control-label" for="">手机：</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" placeholder="手机号码" name="phone" id="name">
+                        <input type="text" class="form-control" placeholder="手机号码" name="phone" id="phone">
                     </div>
                 </div>
                 <div class="form-group">
@@ -92,6 +95,19 @@ $('.page-content-area').ace_ajax('loadScripts', scripts, function(args) {
 			  result=$.parseJSON(result);
 			  for(var o in result){
                   $("#"+o).val(result[o]);
+                  if("roles"==o && result[o].length>0){
+                	  var selectdRoleNames="";
+                	  var selectdRoleIds="";
+                	  for(var i in result[o]){
+                		  selectdRoleNames +=","+result[o][i].name;
+                		  selectdRoleIds +=","+result[o][i].id;
+                	  }
+                	  if(selectdRoleIds!=""){
+                		  $("#selectdRoleIds").val(selectdRoleIds.substring(1,selectdRoleIds.length));
+                		  $("#selectdRoleNames").val(selectdRoleNames.substring(1,selectdRoleNames.length));
+                	  }
+                	  
+                  }
                }
 		  });  
 	  }else{
@@ -112,6 +128,9 @@ $('.page-content-area').ace_ajax('loadScripts', scripts, function(args) {
     		}
     		
     	}); 
+    }
+    function openSelectRole(){
+    	showModalSec("pages/systems/common/selectRole.jsp?selectdRoleIds="+$("#selectdRoleIds").val());
     }
 </script>
 </html>
