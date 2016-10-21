@@ -66,7 +66,7 @@
 	    update tb_user set name=#{name},account=#{account},email=#{email},phone=#{phone},updateTime=#{updateTime} where id=#{id}
 	</update>
 	
-	<delete id="delUserById">
+	<delete id="delete">
 	    delete from tb_user where id = #{id}
 	</delete>
 </mapper>

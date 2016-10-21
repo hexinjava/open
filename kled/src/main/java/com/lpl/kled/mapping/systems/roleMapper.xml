@@ -3,6 +3,28 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.lpl.kled.dao.systems.RoleDao">
+    <resultMap type="com.lpl.kled.entity.systems.Role" id="roleMap">  
+        <id property="id" column="id" />  
+        <result property="name" column="name" />  
+        <result property="remark" column="remark" />
+    </resultMap>  
+  
+    <resultMap type="com.lpl.kled.entity.systems.Role" id="rolePowerMap" extends="roleMap">  
+        <collection property="powers" ofType="com.lpl.kled.entity.systems.Power">  
+            <id property="id" column="powerId" />  
+            <result property="name" column="powerName" />  
+        </collection>  
+    </resultMap>  
+     
+     <select id="selectRoleById" parameterType="long"  
+        resultMap="rolePowerMap">  
+        select u.id,u.name,u.account,u.state,u.email,u.phone,
+               r.id as roleId,r.name as roleName, r.remark as roleRemark
+        from tb_role r left join tb_role_power rp on r.id=rp.roleId  
+                       left join tb_power p on p.id=rp.powerId 
+        where u.id = #{id}  
+    </select> 
+
 	<select id="getRoleByUserId" resultType="com.lpl.kled.entity.systems.Role">
 	    select r.* from tb_role r left  join tb_user_role ur on r.id=ur.roleid  where ur.userid = #{userId}
 	</select>	
@@ -21,6 +43,24 @@
  	    </if> 
 	</select>
 	
+	<select id="queryById" resultType="com.lpl.kled.entity.systems.Role">
+	    select * from tb_role where id=#{id}
+	</select>
+	<insert id="create" parameterType="com.lpl.kled.entity.systems.User" >
+	     INSERT INTO tb_role (name,remark,createTime) 
+                   VALUES (#{name},#{remark},#{createTime})  
+	</insert>
+	
+	<update id="update" parameterType="com.lpl.kled.entity.systems.User">
+	    update tb_role set name=#{name},remark=#{remark},updateTime=#{updateTime} where id=#{id}
+	</update>
+	
+	<delete id="delete">
+	    delete from tb_role where id = #{id}
+	</delete>
+	
+	
+	<!-- 用户角色关系 start -->
 	<insert id="createUserRole">
 	    INSERT INTO tb_user_role (userid,roleid) 
                    VALUES (#{userId},#{roleId})  
@@ -28,4 +68,5 @@
 	<delete id="delUserRoleByUserId">
 	    delete from tb_user_role where userid = #{userId}
 	</delete>
+	<!-- 用户角色关系 end -->
 </mapper>

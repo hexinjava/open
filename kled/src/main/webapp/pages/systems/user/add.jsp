@@ -11,7 +11,7 @@
     <div class='modal-dialog modal-md' role='document'>
         <div class='modal-content'>
             <div class='modal-header'>
-                <button type="button" class="close" onclick="hideModal()"><span aria-hidden="true">&times;</span></button><h3 class='modal-title'>个人信息</h3>
+                <button type="button" class="close" onclick="hideModal()"><span aria-hidden="true">&times;</span></button><h3 class='modal-title'>用户信息</h3>
             </div>
             <div class='modal-body'>
                 <input type="hidden" name="id" id="id"/>

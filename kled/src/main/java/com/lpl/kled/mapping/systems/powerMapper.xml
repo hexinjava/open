@@ -11,4 +11,18 @@
     <select id="getPowerByRoleId" resultType="com.lpl.kled.entity.systems.Power">
 	    select p.* from tb_power p left  join tb_role_power rp on p.id=rp.powerid  where rp.roleid = #{roleId}
 	</select>
+	
+	<select id="getPowerList" resultType="com.lpl.kled.entity.systems.Power">
+	    select * from tb_power
+	</select>
+	
+	<!-- 角色权限关系 start -->
+	<insert id="createRolePower">
+	    INSERT INTO tb_role_power (roleId,powerId) 
+                   VALUES (#{roleId},#{powerId})  
+	</insert>
+	<delete id="delUserRoleByUserId">
+	    delete from tb_role_power where roleId = #{roleId}
+	</delete>
+	<!-- 角色权限关系 end -->
 </mapper>

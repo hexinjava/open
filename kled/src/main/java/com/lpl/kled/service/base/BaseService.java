@@ -44,7 +44,7 @@ public interface BaseService<T> {
 	 * @return boolean    返回类型 
 	 * @throws
 	 */
-	public boolean delById(Long id);
+	public boolean delete(Long id);
 	/**
 	 * 创建T信息
 	 * @Title: create 

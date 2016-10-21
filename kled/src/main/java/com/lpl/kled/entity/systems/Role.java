@@ -2,6 +2,8 @@ package com.lpl.kled.entity.systems;
 
 import java.util.List;
 
+import com.lpl.kled.entity.base.Base;
+
 /**
  * 角色DTO
  * @ClassName: RoleDto 
@@ -10,9 +12,8 @@ import java.util.List;
  * @date 2016年10月8日 下午5:52:34 
  *
  */
-public class Role {
+public class Role extends Base{
     
-	private Long id;
 	
     private String name;//名称
 
@@ -21,13 +22,6 @@ public class Role {
     private String remark;//value
     
     private List<Power> powers;
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

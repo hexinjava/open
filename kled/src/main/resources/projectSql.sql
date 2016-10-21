@@ -56,6 +56,8 @@ CREATE TABLE tb_role (
   name varchar(50) NOT NULL COMMENT '名称',  
   code varchar(50) DEFAULT  NULL COMMENT '编码',
   remark varchar(250) DEFAULT NULL COMMENT '备注',
+  createTime datetime DEFAULT NULL COMMENT '创建时间',   
+  updateTime datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)  
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; 
 

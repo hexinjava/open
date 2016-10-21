@@ -15,6 +15,7 @@ import com.lpl.kled.controller.base.BaseController;
 import com.lpl.kled.dto.QueryResult;
 import com.lpl.kled.dto.SubmitResult;
 import com.lpl.kled.entity.systems.Role;
+import com.lpl.kled.service.systems.PowerService;
 import com.lpl.kled.service.systems.RoleService;
 
 
@@ -22,7 +23,9 @@ import com.lpl.kled.service.systems.RoleService;
 public class RoleController extends BaseController{
 
 	@Autowired
-    private RoleService roleService;  
+    private RoleService roleService;
+	@Autowired
+    private PowerService powerService;
       
     @RequestMapping("/pages/systems/role/list")
     public String toList(HttpServletRequest request,Model model){
@@ -31,21 +34,21 @@ public class RoleController extends BaseController{
     
     @RequestMapping("/pages/systems/role/add")
     @ResponseBody
-    public String saveUser(HttpServletRequest request,Model model){
+    public String save(HttpServletRequest request,Model model){
     	Role role=getPostEntity(request, Role.class);
-    	boolean bool=this.roleService.create(role);
+    	boolean bool=this.roleService.createOrUpdate(role);
     	return toJson(new SubmitResult(bool?0:1));
     }
     
     @RequestMapping("/pages/systems/role/get")
     @ResponseBody
-    public String getUser(HttpServletRequest request,Model model){
-    	return toJson(this.roleService.getById(Long.parseLong(request.getParameter("roleId"))));
+    public String get(HttpServletRequest request,Model model){
+    	return toJson(this.roleService.getById(request.getParameter("id")!=null?Long.parseLong(request.getParameter("id")):null));
     }
     
     @RequestMapping("/pages/systems/role/list/data")
 	@ResponseBody
-    public String getUserData(HttpServletRequest request,Model model)throws Exception{
+    public String getData(HttpServletRequest request,Model model)throws Exception{
     	Map<String,Object> params=getQueryParams(request);
     	QueryResult<Role> result = this.roleService.getPaginationData(params);
         return toJson(result);
@@ -53,8 +56,22 @@ public class RoleController extends BaseController{
     
     @RequestMapping("/pages/systems/role/del")
     @ResponseBody
-    public String delUser(HttpServletRequest request,Model model){
-    	boolean bool=this.roleService.delById(Long.parseLong(request.getParameter("roleId")));
+    public String delete(HttpServletRequest request,Model model){
+    	boolean bool=this.roleService.delete(request.getParameter("id")!=null?Long.parseLong(request.getParameter("id")):null);
     	return toJson(new SubmitResult(bool?0:1));
     }
+    
+    @RequestMapping("/pages/systems/role/treeData")
+    @ResponseBody
+    public String getTreeData(HttpServletRequest request,Model model){
+    	return toJson(this.powerService.getTreeData(request.getParameter("id")!=null?Long.parseLong(request.getParameter("id")):null));
+    }
+    
+    @RequestMapping("/pages/systems/role/configPower")
+    @ResponseBody
+    public String configPower(HttpServletRequest request,Model model){
+    	boolean bool=this.powerService.rolePowerRelation(request.getParameter("roleId")!=null?Long.parseLong(request.getParameter("roleId")):null,request.getParameter("ids"));
+    	return toJson(new SubmitResult(bool?0:1));
+    }
+   
 }

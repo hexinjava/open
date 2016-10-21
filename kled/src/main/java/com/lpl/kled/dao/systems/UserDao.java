@@ -24,7 +24,7 @@ public interface UserDao {
 	
 	public Long update(User user);
 	
-	public Long delUserById(@Param(value="id")Long id);
+	public Long delete(@Param(value="id")Long id);
 	/**
 	 * 根据id查询用户信息 包含角色
 	 * @Title: selectUserById 

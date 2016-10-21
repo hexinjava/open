@@ -169,7 +169,7 @@
 	                  <a href="#pages/systems/user/list"><span>用户管理</span></a>
 	                </li>
 	                <li>
-	                  <a href="#pages/services/service_definitions/index"><span>角色管理</span></a>
+	                  <a href="#pages/systems/role/list"><span>角色管理</span></a>
 	                </li>
 	              </ul>
 	            </li>

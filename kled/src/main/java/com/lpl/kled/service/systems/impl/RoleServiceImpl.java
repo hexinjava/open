@@ -1,10 +1,12 @@
 package com.lpl.kled.service.systems.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lpl.kled.common.utils.MD5;
 import com.lpl.kled.dao.systems.PowerDao;
@@ -44,26 +46,32 @@ public class RoleServiceImpl implements RoleService{
 		return roleDao.getPaginationCount(params);
 	}
 	
-	public boolean create(Role role){
-		Long l= roleDao.create(role);
+	public boolean create(Role entity){
+		entity.setCreateTime(new Date());
+		Long l= roleDao.create(entity);
 		return l!=null && l>0?true:false;
 	}
 	@Override
-	public boolean delById(Long id) {
-		Long l= roleDao.delById(id);
+	public boolean delete(Long id) {
+		Long l= roleDao.delete(id);
 		return l!=null && l>0?true:false;
 	}
 
-	@Override
-	public boolean update(Role entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
+	@Transactional
 	public boolean createOrUpdate(Role entity) {
-		// TODO Auto-generated method stub
-		return false;
+		if(entity!=null && entity.getId()!=null){
+			return update(entity);
+		}else{
+			return create(entity);
+		}
 	}
-
+	
+	
+	@Transactional
+	public boolean update(Role entity){
+		entity.setUpdateTime(new Date());
+		Long l= roleDao.update(entity);
+		return l!=null && l>0?true:false;
+	}
+	
 }

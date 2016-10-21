@@ -61,7 +61,7 @@ public class UserController extends BaseController{
     @RequestMapping("/pages/systems/user/del")
     @ResponseBody
     public String delUser(HttpServletRequest request,Model model){
-    	boolean bool=this.userService.delById(Long.parseLong(request.getParameter("userId")));
+    	boolean bool=this.userService.delete(Long.parseLong(request.getParameter("userId")));
     	return toJson(new SubmitResult(bool?0:1));
     }
 }

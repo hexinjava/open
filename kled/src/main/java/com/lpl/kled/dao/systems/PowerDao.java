@@ -17,4 +17,10 @@ public interface PowerDao {
 	
 	public List<Power> getPowerByRoleId(@Param(value="roleId")Long roleId);
 	
+	public List<Power> getPowerList();
+	
+	public Long delRolePowerByRoleId(@Param(value="roleId")Long roleId);
+	
+	public Long createRolePower(@Param(value="roleId")Long roleId,@Param(value="powerId")Long powerId);
+	
 }
