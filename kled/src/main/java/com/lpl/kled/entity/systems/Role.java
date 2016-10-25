@@ -21,6 +21,8 @@ public class Role extends Base{
     
     private String remark;//value
     
+    private String powerIds;
+    
     private List<Power> powers;
 
 	public String getName() {
@@ -53,6 +55,14 @@ public class Role extends Base{
 
 	public void setPowers(List<Power> powers) {
 		this.powers = powers;
+	}
+
+	public String getPowerIds() {
+		return powerIds;
+	}
+
+	public void setPowerIds(String powerIds) {
+		this.powerIds = powerIds;
 	}
 
 	

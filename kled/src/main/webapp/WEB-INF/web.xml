@@ -108,4 +108,9 @@
 	<listener>  
     	<listener-class>com.lpl.kled.context.systemInit</listener-class>  
 	</listener>
+	
+	<listener>  
+    	<listener-class>com.lpl.kled.common.listener.SessionUserListener</listener-class>  
+	</listener>
+	
 </web-app>

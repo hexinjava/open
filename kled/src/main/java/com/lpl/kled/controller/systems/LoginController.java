@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lpl.kled.common.Constant;
+import com.lpl.kled.common.listener.SessionUserListener;
 import com.lpl.kled.common.utils.MD5;
 import com.lpl.kled.common.utils.SessionUtil;
 import com.lpl.kled.entity.common.Img;
@@ -50,11 +53,28 @@ public class LoginController {
         User user = this.userService.getCurrentUserByAccount(userName);
         String md5PassWord=MD5.encodePassword(passWord);
         if(user != null && md5PassWord.equals(user.getPassword())){
-        	SessionUtil.setAttr(request, "currentUser", user);
+        	
+        	//验证该用户ID，是否已经登录。当前用户比较已登录到系统的静态变量中的值，是否存在。  
+            Boolean hasLogin = SessionUserListener.checkIfHasLogin(user);
+            if (hasLogin) {  
+                System.out.println(user.getId()+"已经登录到本系统。");
+                model.addAttribute("error", "已经登录到本系统");
+                //return "redirect:/login"; 
+            } else {  
+                // 如果没有重复登录，则将该登录的用户信息添加入session中  
+            	request.getSession().setAttribute(Constant.CURRENT_USER, user);  
+                // 比较保存所有用户session的静态变量中，是否含有当前session的键值映射，如果含有就删除  
+                if (SessionUserListener.containsKey(request.getSession().getId())) {  
+                    SessionUserListener.removeSession(request.getSession().getId());  
+                }  
+                //把当前用户封装的session按，sessionID和session进行键值封装，添加到静态变量map中。  
+                SessionUserListener.addUserSession(request.getSession());  
+            }  
         	return "redirect:/main"; 
         }
         return "/index"; 
     }
+    
     /**
      * 加载登录二维码图片
      * @Title: getSystemLoginQR 

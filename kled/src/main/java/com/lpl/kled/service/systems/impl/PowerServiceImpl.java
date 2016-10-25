@@ -146,7 +146,10 @@ public class PowerServiceImpl implements PowerService{
 			if(StringUtil.isNotEmpty(powerIds)){
 				String [] powers=powerIds.split(",");
 				for (String powerId : powers) {
-					powerDao.createRolePower(roleId, Long.parseLong(powerId));
+					if(!"0".equals(powerId)){//0id 是全选的id
+						powerDao.createRolePower(roleId, Long.parseLong(powerId));
+					}
+					
 				}
 			}
 			bool=true;

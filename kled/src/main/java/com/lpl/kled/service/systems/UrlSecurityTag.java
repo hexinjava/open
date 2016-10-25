@@ -29,12 +29,12 @@ public class UrlSecurityTag extends TagSupport {
 		}
 		if (StringUtils.isNotBlank(verifyUrl)) {
 			// 如果是超级管理员则不进行检查
-			if ( !"/user/main".equals(verifyUrl)) {
-				return EVAL_BODY_INCLUDE;
-			} else {
-				// 检查路径是否有权限访问
-				User user = (User) SessionUtil.getAttr((HttpServletRequest) this.pageContext.getRequest(), "currentUser");
-				if (user != null) {
+			User user = (User) SessionUtil.getAttr((HttpServletRequest) this.pageContext.getRequest(), "currentUser");
+			if (user != null) {
+				if ("admin".equals(user.getAccount())) {
+					return EVAL_BODY_INCLUDE;
+				} else {
+					// 检查路径是否有权限访问
 					if (powerService.exist(user, verifyUrl)) {
 						return EVAL_BODY_INCLUDE;
 					}

@@ -165,12 +165,16 @@
 	                <li class='nav-sub-header'>
 	                  <a><span class='text-base'>系统</span></a>
 	                </li>
+	                <s:urlSecurity verifyUrl="userManagement">
 	                <li >
 	                  <a href="#pages/systems/user/list"><span>用户管理</span></a>
 	                </li>
+	                </s:urlSecurity>
+	                <s:urlSecurity verifyUrl="roleManagement">
 	                <li>
 	                  <a href="#pages/systems/role/list"><span>角色管理</span></a>
 	                </li>
+	                </s:urlSecurity>
 	              </ul>
 	            </li>
 	          

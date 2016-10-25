@@ -70,7 +70,8 @@ public class RoleController extends BaseController{
     @RequestMapping("/pages/systems/role/configPower")
     @ResponseBody
     public String configPower(HttpServletRequest request,Model model){
-    	boolean bool=this.powerService.rolePowerRelation(request.getParameter("roleId")!=null?Long.parseLong(request.getParameter("roleId")):null,request.getParameter("ids"));
+    	Role role=getPostEntity(request, Role.class);
+    	boolean bool=this.powerService.rolePowerRelation(role.getId(),role.getPowerIds());
     	return toJson(new SubmitResult(bool?0:1));
     }
    

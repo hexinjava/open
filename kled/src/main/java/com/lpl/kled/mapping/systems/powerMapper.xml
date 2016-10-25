@@ -21,7 +21,7 @@
 	    INSERT INTO tb_role_power (roleId,powerId) 
                    VALUES (#{roleId},#{powerId})  
 	</insert>
-	<delete id="delUserRoleByUserId">
+	<delete id="delRolePowerByRoleId">
 	    delete from tb_role_power where roleId = #{roleId}
 	</delete>
 	<!-- 角色权限关系 end -->

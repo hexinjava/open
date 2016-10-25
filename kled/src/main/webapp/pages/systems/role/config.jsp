@@ -25,8 +25,8 @@
                 <input type="button" name="commit" value="确定" class="btn btn-info" onclick="submitConfig()" />
                 <button name="button" type="button" class="btn btn-default btn btn-default" onclick="hideModal()">取消</button>
             </div>
-            <input type="hidden" name="ids" id="ids">
-            <input type="hidden" name="roleId" id="roleId">
+            <input type="hidden" name="id" id="id">
+            <input type="hidden" name="powerIds" id="powerIds">
         </div>
     </div>
 </form>    
@@ -52,7 +52,7 @@ $('.page-content-area').ace_ajax('loadScripts', scripts, function(args) {
         };  
 	
 	if(args.id!=null){
-		$("#roleId").val(args.id);
+		$("#id").val(args.id);
 		  kled.ajax.get('pages/systems/role/treeData?id='+args.id,function(result){
 			  result=$.parseJSON(result);
 			  zTree = $.fn.zTree.init($("#powerTree"), setting, result);  
@@ -68,8 +68,9 @@ $('.page-content-area').ace_ajax('loadScripts', scripts, function(args) {
         for (i = 0; i < nodes.length; i++) {  
         	ids.push(nodes[i].id);
         }  
-        $("#ids").val(ids);
+        $("#powerIds").val(ids);
         debugger;
+        var v= $("#configForm").serializeJson();
      	kled.ajax.post('pages/systems/role/configPower',$("#configForm").serializeJson(),function(result){
     		result=$.parseJSON(result);
     		if(result.state==0){
